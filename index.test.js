@@ -104,8 +104,20 @@ describe("[Exercise 6] Car", () => {
   beforeEach(() => {
     focus = new utils.Car("focus", 20, 30); // each test must start with a fresh car
   });
-  test("[15] driving the car returns the updated odometer", () => {});
-  test("[16] driving the car uses gas", () => {});
+  test("[15] driving the car returns the updated odometer", () => {
+    expect(focus.drive(100)).toBe(100);
+    expect(focus.drive(100)).toBe(200);
+    expect(focus.drive(100)).toBe(300);
+    expect(focus.drive(200)).toBe(500);
+    expect(focus.drive(200)).toBe(`${600} (ran out of gas)`);
+    expect(focus.drive(200)).toBe(`${600} (gas tank is empty, must refuel)`);
+  });
+  test("[16] driving the car uses gas", () => {
+    focus.drive(600);
+    expect(focus.drive(300)).toBe(`${600} (gas tank is empty, must refuel)`);
+    expect(focus.drive(1000)).toBe(`${600} (gas tank is empty, must refuel)`);
+    expect(focus.tank).toBe(0);
+  });
   test("[17] refueling allows to keep driving", () => {});
   test("[18] adding fuel to a full tank has no effect", () => {});
 });
