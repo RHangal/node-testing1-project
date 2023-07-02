@@ -121,6 +121,7 @@ class Car {
     this.tank = tankSize; // car initiazes full of gas
     // ✨ initialize whatever other properties are needed
     this.mpg = mpg;
+    this.tankSize = tankSize;
     this.name = name;
   }
 
@@ -141,7 +142,7 @@ class Car {
     // ✨ implement
     if (this.tank === 0) {
       return `${this.odometer} (gas tank is empty, must refuel)`;
-    } else if (distance / this.mpg > this.tank) {
+    } else if (distance / this.mpg >= this.tank) {
       this.odometer += this.tank * this.mpg;
       this.tank = 0;
       return `${this.odometer} (ran out of gas)`;
@@ -165,6 +166,16 @@ class Car {
    */
   refuel(gallons) {
     // ✨ implement
+    let refuelDistance = 0;
+    if (gallons + this.tank >= this.tankSize) {
+      this.tank = this.tankSize;
+      refuelDistance = this.tank * this.mpg;
+      return refuelDistance;
+    } else {
+      this.tank += gallons;
+      refuelDistance = this.tank * this.mpg;
+      return refuelDistance;
+    }
   }
 }
 

@@ -118,8 +118,19 @@ describe("[Exercise 6] Car", () => {
     expect(focus.drive(1000)).toBe(`${600} (gas tank is empty, must refuel)`);
     expect(focus.tank).toBe(0);
   });
-  test("[17] refueling allows to keep driving", () => {});
-  test("[18] adding fuel to a full tank has no effect", () => {});
+  test("[17] refueling allows to keep driving", () => {
+    expect(focus.drive(600)).toBe(`${600} (ran out of gas)`);
+    expect(focus.refuel(10)).toBe(300);
+    expect(focus.refuel(99)).toBe(600);
+    expect(focus.drive(100)).toBe(700);
+  });
+  test("[18] adding fuel to a full tank has no effect", () => {
+    expect(focus.drive(600)).toBe(`${600} (ran out of gas)`);
+    expect(focus.refuel(10)).toBe(300);
+    expect(focus.refuel(10)).toBe(600);
+    expect(focus.refuel(99)).toBe(600);
+    expect(focus.refuel(99)).toBe(600);
+  });
 });
 
 describe("[Exercise 7] isEvenNumberAsync", () => {
